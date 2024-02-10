@@ -1,29 +1,29 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    
-    <html language="en">
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error-Filled Page</title>
-    
+</head>
 <body>
-    <h1>Welcome to My Error-Filled Page
+    <h1>Welcome to My Error-Filled Page</h1>
     
-    This is a paragraph with mismatched tags and missing closing tags.</p>
+    <p>This is a paragraph with mismatched tags and missing closing tags.</p>
     
     <ol>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-        <li>Item 4</li>
-        <li>Item 5</li>
-        <li>Item 6</li>
-        <li>Item 7</li>
-        <li>Item 8</li>
-        <li>Item 9</li>
-        <li>Item 10</li>
-    </ul>
+        <li><p>Item 1</p></li>
+        <li><p>Item 2</p></li>
+        <li><p>Item 3</p></li>
+        <li><p>Item 4</p></li>
+        <li><p>Item 5</p></li>
+        <li><p>Item 6</p></li>
+        <li><p>Item 7</p></li>
+        <li><p>Item 8</p></li>
+        <li><p>Item 9</p></li>
+        <li><p>Item 10</p></li>
+    </ol>
 
-    <p>This is another paragraph without proper indentation.
+    <p>This is another paragraph without proper indentation.</p>
     
     <img src="image.jpg">
 
@@ -51,7 +51,7 @@
 
     <input type="button" value="Click me">
 
-    <!-- This is an unclosed comment
+    <!-- This is an unclosed comment-->
 
     <a href="#">Link without closing tag
 
@@ -61,5 +61,25 @@
         <li>Descriptive Item Title</li>
         <li>Descriptive Item Text</li>
     </dl>
+
+    <h2>Errors Solved:<h2>
+        <ol>
+            <li>Closed the Unclosed Comment in line 54</li>
+            <li>Added DOCTYPE in line 1</li>
+            <li>Fixed Head formatting in line 1
+                <ol>
+                    <li>html lang="en" instead of html language = "en"</li>
+                    <li>Included meta charset="UTF-8"</li>
+                    <li>Included meta name="viewport" content="width=device-width, initial-scale=1.0"</li>
+                    <li>Fixed Title location</li>
+                </ol>
+            </li>
+            <li>Closed Head tag</li>
+            <li>Added a beginning p tag in line 11</li>
+            <li>Closed h1 tag in line 9</li>
+            <li>Added paragraph tags for each list</li>
+            <li>Replaced ul/ with ol/ in line 24</li>
+            <li>Closed the paragraph in line 26</li>
+        <ol>
 </body>
 </html>
