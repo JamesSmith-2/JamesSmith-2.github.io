@@ -1,0 +1,21 @@
+/* Title */
+
+/*Events*/
+
+/*Table Headings*
+
+/*Table Descriptions*/
+
+@media screen and (max-width: 400x) {
+    html{
+        background-color: brown;
+    }
+    .concert{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .item{
+
+    }
+}
