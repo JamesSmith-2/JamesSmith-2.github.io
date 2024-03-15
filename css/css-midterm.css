@@ -64,12 +64,12 @@ body {
     border-bottom: 1px solid #eee;
   }
   
-  /* Hover effect for repertoire list */
+  /* Hover for repertoire */
   .repertoire li:hover {
     background-color: greenyellow;
   }
   
-  /* Style for the footer */
+  /* footer */
   footer {
     background-color: #333;
     color: #fff;
