@@ -1,50 +1,4 @@
-/*
-body {
-    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
-    background-color: bisque;
-}
-
-.concert h2{
-    background-color: white;
-}
-
-.concert h3{
-    background-color: darkcyan;
-}
-
-.concert{
-    background-color: burlywood;
-}
-
-.date{
-    background-color: orange;
-}
-
-.description{
-    background-color: brown;
-}
-
-.artists{
-    background-color: blueviolet;
-}
-
-.repertoire{
-    background-color: aqua;
-}
-
-@media screen and (max-width: 400x) {
-    html{
-        background-color: red;
-    }
-    .concert{
-        display: flex;
-        flex-direction: column;
-
-    }
-}
-*/
-
-/* Base styles for the page */
+/* Basics */
 body {
     font-family: 'Helvetica Neue', sans-serif;
     line-height: 1.6;
@@ -54,7 +8,7 @@ body {
     padding: 20px;
   }
   
-  /* Style for the main header */
+  /* header */
   header {
     background-color: #333;
     color: #fff;
@@ -71,7 +25,7 @@ body {
   
   /* Style for concert details */
   .description {
-    background-color: #fff;
+    background-color: greenyellow;
     border: 1px solid #ddd;
     padding: 15px;
     margin-bottom: 15px;
