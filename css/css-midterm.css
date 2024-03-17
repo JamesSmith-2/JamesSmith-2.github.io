@@ -1,3 +1,7 @@
+/*Desktop*/
+  
+
+
 /* Basics */
 body {
     font-family: 'Helvetica Neue', sans-serif;
@@ -36,15 +40,28 @@ body {
     z-index: 0;
   }
   
+  #togglebutton{
+    display: inline-block;
+
+  }
   /* description */
-  .description {
+
+  #togglebutton:checked ~ #vivaldi-description {
+    display: flex;
+  }
+
+  #vivaldi-description {
+    display: none;
     background-color: #fff;
     border: 1px solid #ddd;
     padding: 15px;
     margin-bottom: 15px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     z-index: 0;
+  }
 
+  .title:hover:hover + .description, .title:active + .description {
+    display: flex;
   }
   
   /* artists */
@@ -79,4 +96,21 @@ body {
     bottom: 0;
     width: 100%;
   }
-  
+
+  .social_button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+
+  /* Mobile */
+
+  @media (max-width: 400px) {
+    
+}
