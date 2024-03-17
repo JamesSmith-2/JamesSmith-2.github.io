@@ -4,17 +4,17 @@
 
 /* Basics */
 body {
-    font-family: 'Helvetica Neue', sans-serif;
+    font-family: 'Georgia', 'Times New Roman', Calibri;
     line-height: 1.6;
     color: #333;
-    background-color: #f4f4f4;
+    background-color: #a0aecd;
     margin: 0;
     padding: 20px;
   }
   
   /* header */
   header {
-    background-color: #333;
+    background-color: ;
     color: #fff;
     padding: 20px 0;
     text-align: center;
@@ -46,11 +46,11 @@ body {
   }
   /* description */
 
-  #togglebutton:checked ~ #vivaldi-description {
-    display: flex;
+  #togglebutton:checked ~ #vivaldi-description,#togglebutton:checked ~ #beethoven3-description, #togglebutton:checked ~ #Tchaikovsky-description,#togglebutton:checked ~ #ravel-description,#togglebutton:checked ~ #beethoven8-description,#togglebutton:checked ~ #beethoven-emperor-description,#togglebutton:checked ~ #barktok-description,#togglebutton:checked ~ #brahms-description,#togglebutton:checked ~ #beethoven-violin-description  {
+    display: block;
   }
 
-  #vivaldi-description {
+  #vivaldi-description, #beethoven3-description, #Tchaikovsky-description, #ravel-description, #beethoven8-description, #beethoven-emperor-description, #bartok-description, #brahms-description, #beethoven-violin-description  {
     display: none;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -58,10 +58,6 @@ body {
     margin-bottom: 15px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     z-index: 0;
-  }
-
-  .title:hover:hover + .description, .title:active + .description {
-    display: flex;
   }
   
   /* artists */
