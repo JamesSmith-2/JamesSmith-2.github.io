@@ -14,7 +14,7 @@ body {
   
   /* header */
   header {
-    background-color: ;
+    background-color: #8B9AB9;
     color: #fff;
     padding: 20px 0;
     text-align: center;
@@ -52,7 +52,7 @@ body {
 
   #vivaldi-description, #beethoven3-description, #Tchaikovsky-description, #ravel-description, #beethoven8-description, #beethoven-emperor-description, #bartok-description, #brahms-description, #beethoven-violin-description  {
     display: none;
-    background-color: #fff;
+    background-color: #8B9AB9;
     border: 1px solid #ddd;
     padding: 15px;
     margin-bottom: 15px;
@@ -63,7 +63,7 @@ body {
   /* artists */
   .artists {
     font-style: italic;
-    color: #888;
+    color: black;
   }
   
   /* repertoire list */
