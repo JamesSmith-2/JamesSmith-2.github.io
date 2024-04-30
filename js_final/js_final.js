@@ -1,3 +1,11 @@
+const ball = document.querySelector('.ball');
+const player1 = document.getElementById('player1');
+const player2 = document.getElementById('player2');
+
+//
+player1.addEventListener('mousedown', handlePaddleMouseDown);
+player2.addEventListener('mousedown', handlePaddleMouseDown);
+
 // volume
 const handle = document.querySelector('.volume-handle');
 let isAlertShown = false; // track if alert has been shown
@@ -18,16 +26,16 @@ handle.addEventListener('mousedown', () => {
             const volumeLevel = Math.floor(Math.random() * 101);
             alert(`In order to change your volume level to ${volumeLevel}%, you must beat me in a game of pong!`);
             startPongGame(); // Begin the pong game after closing the alert
-}});
+        }
+    isDragging = false;
+    });
 });
 // Pong 
-const ball = document.querySelector('.ball');
-const player1 = document.getElementById('player1');
-const player2 = document.getElementById('player2');
-
-//
-player1.addEventListener('mousedown', handlePaddleMouseDown);
-player2.addEventListener('mousedown', handlePaddleMouseDown);
+function handlePaddleMouseDown(e)
+{
+    isPaddleDragging = true;
+    startY = e.clientY;
+}
 
 let ballX = 390;
 let ballY = 190;
@@ -44,6 +52,18 @@ let startY = 0;
 //     isPaddleDragging = true;
 //     startY = e.clientY;
 // });
+
+function handlePaddleMouseDown(e) {
+    isPaddleDragging = true;
+    startY = e.clientY;
+}
+
+player1.addEventListener('mousedown', (e) => 
+{
+    isPaddleDragging = true;
+    startY = e.clientY;
+    e.preventDefault();
+});
 
 //track mouse move
 document.addEventListener('mousedown', (e) => {
@@ -67,9 +87,68 @@ document.addEventListener('mousedown', (e) => {
     document.addEventListener('mouseup', () => {
         isDragging = false;
     });
+//---
 
-
+    // Event listener for each frame
+    function updateAI() {
+        // Calculate the difference between the ball's y-position and the player2 paddle's current y-position
+        const deltaY = ball.getBoundingClientRect().top - player2.getBoundingClientRect().top;
     
+        const minTop = 0;
+        const maxTop = 400;
+        // Adjust the paddle's position toward the ball's y-position
+        const speed = 0.1; // Adjust this value as needed
+        player2.style.top = (player2.offsetTop + deltaY * speed) + 'px';
+    }
+//--
+
+// Check for collision between ball and player1 paddle
+function checkCollisionP1() {
+    const ballRect = ball.getBoundingClientRect();
+    const player1Rect = player1.getBoundingClientRect();
+
+    const ballCenterX = ballRect.left + ballRect.width / 2;
+    const ballCenterY = ballRect.top + ballRect.height / 2;
+
+    const player1CenterX = player1Rect.left + player1Rect.width / 2;
+    const player1CenterY = player1Rect.top + player1Rect.height / 2;
+
+    const distance = Math.sqrt(
+        (ballCenterX - player1CenterX) ** 2 +
+        (ballCenterY - player1CenterY) ** 2
+    );
+
+    const totalRadius = ballRect.width / 2 + player1Rect.width / 2;
+
+    if (distance <= ballRect.width / 2 + player1Rect.width / 2) {
+        // Handle collision
+        ballSpeedX *= -1; // Example: Reverse ball's horizontal direction
+    }
+}
+
+function checkCollisionP2() {
+    const ballRect = ball.getBoundingClientRect();
+    const player2Rect = player2.getBoundingClientRect();
+
+    const ballCenterX = ballRect.left + ballRect.width / 2;
+    const ballCenterY = ballRect.top + ballRect.height / 2;
+
+    const player2CenterX = player2Rect.left + player2Rect.width / 2;
+    const player2CenterY = player2Rect.top + player2Rect.height / 2;
+
+    const distance = Math.sqrt(
+        (ballCenterX - player2CenterX) ** 2 +
+        (ballCenterY - player2CenterY) ** 2
+    );
+
+    const totalRadius = ballRect.width / 2 + player2Rect.width / 2;
+
+    if (distance <= ballRect.width / 2 + player2Rect.width / 2) {
+        // Handle collision
+        ballSpeedX *= -1; // Example: Reverse ball's horizontal direction
+    }
+}
+
 function updateBallPosition() {
     ballX += ballSpeedX;
     ballY += ballSpeedY;
@@ -85,14 +164,16 @@ function updateBallPosition() {
     }
 }
 
-function handlePaddleMouseDown(e) {
-    isPaddleDragging = true;
-    startY = e.clientY;
-}
-
 function gameLoop() {
     updateBallPosition();
     requestAnimationFrame(gameLoop);
+    setInterval(updateAI, .1);
+    setInterval(checkCollision, 16);
+}
+
+function checkCollision() {
+    checkCollisionP1();
+    checkCollisionP2();
 }
 
 function startPongGame() {
