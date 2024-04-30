@@ -71,13 +71,13 @@ document.addEventListener('mousedown', (e) => {
     {
         //find position of player 1
         const deltaY = e.clientY - startY;
-        const newPosition = parseInt(e.target.style.top) + deltaY;
+        const newPosition = parseInt(player1.style.top) + deltaY;
 
             //keep paddle in bounds of box
         const minTop = 0;
         const maxTop = 400;
 
-        e.target.style.top = Math.max(minTop, Math.min(maxTop, newPosition)) + 'px';
+        player1.style.top = Math.max(minTop, Math.min(maxTop, newPosition)) + 'px';
         //update StartY for the next mouse move
         startY = e.clientY;
         }
@@ -166,10 +166,10 @@ function updateBallPosition() {
 
 function gameLoop() {
     updateBallPosition();
+    updateAI();
+    checkCollision();
     requestAnimationFrame(gameLoop);
-    setInterval(updateAI, .1);
-    setInterval(checkCollision, 16);
-}
+    }
 
 function checkCollision() {
     checkCollisionP1();
