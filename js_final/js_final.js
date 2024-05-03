@@ -143,9 +143,9 @@ function checkCollisionP2() {
 
     const totalRadius = ballRect.width / 2 + player2Rect.width / 2;
 
-    if (distance <= ballRect.width / 2 + player2Rect.width / 2) {
+    if (distance <= totalRadius) {
         // Handle collision
-        ballSpeedX *= -1; // Example: Reverse ball's horizontal direction
+        ballSpeedX *= -1; // Reverse ball's horizontal direction
     }
 }
 
