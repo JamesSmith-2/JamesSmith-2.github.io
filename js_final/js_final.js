@@ -70,42 +70,46 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     //track mouse move
     document.addEventListener('mousemove', (e) => {
-        if (isPaddleDragging)
-        {
-            //find position of player 1
+        if (isPaddleDragging) {
+            // Calculate the new position
             const deltaY = e.clientY - startY;
-            const newPosition = parseInt(player1.style.top) + deltaY;
-
-            console.log('New Position:', newPosition);
-
-                //keep paddle in bounds of box
+            let player1Top = window.getComputedStyle(player1).getPropertyValue('top');
+            let newPosition = parseInt(player1Top) + deltaY;
+    
+            // Keep the paddle within the bounds of the game board
             const minTop = 0;
-            const maxTop = 400;
-
-            player1.style.top = Math.max(minTop, Math.min(maxTop, newPosition)) + 'px';
-            //update StartY for the next mouse move
+            const maxTop = 400 - player1.offsetHeight; // Subtract the height of the paddle to keep it within the game board
+            newPosition = Math.max(minTop, Math.min(maxTop, newPosition));
+    
+            // Update the position of the paddle
+            player1.style.top = newPosition + 'px';
+    
+            // Update startY for the next mouse move
             startY = e.clientY;
-            }
-        });
+        }
+    });
+    
 
     // Event listener for mouse up
-        document.addEventListener('mouseup', () => {
+        document.addEventListener('mouseup', (e) => {
             isDragging = false;
         });
-    //---
 
         // Event listener for each frame
-        function updateAI() {
-            // Calculate the difference between the ball's y-position and the player2 paddle's current y-position
-            const deltaY = ball.getBoundingClientRect().top - player2.getBoundingClientRect().top;
-        
-            const minTop = 0;
-            const maxTop = 400;
-            // Adjust the paddle's position toward the ball's y-position
-            const speed = 0.1; // Adjust this value as needed
-            player2.style.top = (player2.offsetTop + deltaY * speed) + 'px';
-        }
-    //--
+            function updateAI() {
+                // Calculate the difference between the ball's y-position and the player2 paddle's current y-position
+                const deltaY = ball.getBoundingClientRect().top - player2.getBoundingClientRect().top;
+            
+                const minTop = 0;
+                const maxTop = 400 - player2.offsetHeight; 
+                // Adjust the paddle's position toward the ball's y-position
+                const speed = 1; 
+                let newTop = player2.offsetTop + deltaY * speed;
+            
+                // Keep the paddle within the bounds of the game board
+                newTop = Math.max(minTop, Math.min(maxTop, newTop));
+                player2.style.top = newTop + 'px';
+            }
 
     // Check for collision between ball and player1 paddle
     function checkCollisionP1() {
