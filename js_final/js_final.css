@@ -64,3 +64,13 @@ body {
     left: 390px;
     top: 190px;
 }
+
+#scoreboard {
+    position: absolute;
+    color: white;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: larger;
+    
+}

@@ -2,14 +2,21 @@ const ball = document.querySelector('.ball');
 const player1 = document.getElementById('player1');
 const player2 = document.getElementById('player2');
 
+let playerHits = 0;
+const volumeLevel = Math.floor(Math.random() * 101);
+
+const scoreboard = document.getElementById('scoreboard');
+
 document.addEventListener('DOMContentLoaded', (event) => {
     //
+    let gameRunning = true; 
     player1.addEventListener('mousedown', handlePaddleMouseDown);
     player2.addEventListener('mousedown', handlePaddleMouseDown);
 
     // volume
     const handle = document.querySelector('.volume-handle');
     let isAlertShown = false; // track if alert has been shown
+    let isAlert2Shown = false;
 
     handle.addEventListener('mousedown', () => {
         let isDragging = true;
@@ -24,8 +31,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
             {
                 // Show the alert only if it hasn't been shown before
                 isAlertShown = true;
-                const volumeLevel = Math.floor(Math.random() * 101);
-                alert(`In order to change your volume level to ${volumeLevel}%, you must beat me in a game of pong!`);
+
+                alert(`In order to change your volume level to ${volumeLevel}%, you must beat me in a game of pong!
+                
+                Use the Mouse on the white paddle to begin`);
                 startPongGame(); // Begin the pong game after closing the alert
             }
         isDragging = false;
@@ -50,12 +59,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let isPaddleDragging = false;
     let startY = 0;
 
-    //event listener for mouse down (click on paddle)
-    // player1.addEventListener('mousedown', (e) => {
-    //     isPaddleDragging = true;
-    //     startY = e.clientY;
-    // });
-
+    //event listener for mouse down (click on paddle
     function handlePaddleMouseDown(e) {
         isPaddleDragging = true;
         startY = e.clientY;
@@ -93,6 +97,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Event listener for mouse up
         document.addEventListener('mouseup', (e) => {
             isDragging = false;
+            isPaddleDragging = false;
         });
 
         // Event listener for each frame
@@ -122,6 +127,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
             ballRect.bottom > player1Rect.top) {
             // Handle collision
             ballSpeedX *= -1; // Reverse ball's horizontal direction
+
+            playerHits++;
+            console.log("Player Hits:", playerHits);
+
+            //update scoreboard
+            scoreboard.textContent = `Player Hits: ${playerHits} / ${volumeLevel}`
+
+                if (playerHits >= volumeLevel) {
+                    gameRunning = false;
+
+                    alert(`Congratulations! You have hit the ball ${playerHits} times. The volume was successfully changed to ${volumeLevel}%`)
+                }
         }
     }
 
@@ -138,18 +155,30 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     }
 
-    function updateBallPosition() {
-        ballX += ballSpeedX;
-        ballY += ballSpeedY;
-        ball.style.left = ballX + 'px';
-        ball.style.top = ballY + 'px';
 
-        // Handle collisions with walls
-        if (ballX <= 0 || ballX >= 780) {
-            ballSpeedX *= -1;
-        }
-        if (ballY <= 0 || ballY >= 380) {
-            ballSpeedY *= -1;
+    function updateBallPosition() {
+        if (gameRunning) {
+            ballX += ballSpeedX;
+            ballY += ballSpeedY;
+            ball.style.left = ballX + 'px';
+            ball.style.top = ballY + 'px';
+    
+            // Handle collisions with walls
+            if (ballX <= 0) {
+                ballSpeedX *= -1;
+                ball.style.backgroundColor = 'red'; // Change the color of the ball
+                gameRunning = false; // Stop the game
+
+                alert(`You have lost.
+                Volume will not be changed to ${volumeLevel}%
+                Try. Again.`);
+                
+            } else if (ballX >= 780) {
+                ballSpeedX *= -1;
+            }
+            if (ballY <= 0 || ballY >= 380) {
+                ballSpeedY *= -1;
+            }
         }
     }
 
